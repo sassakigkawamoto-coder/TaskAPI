@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd"
+         version="6.1">
+
+    <display-name>TaskAPI</display-name>
+
+    <!-- A sessão expira após 30 minutos sem uso -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <!--
+      Ordem da cadeia de filtros = ordem dos <filter-mapping> abaixo.
+      1) FiltroTempo (da Tarefa 02) vem primeiro: mede também as requisições recusadas com 401.
+      2) FiltroAutenticacao barra /tarefas/* sem usuário na sessão.
+      Se a sua Tarefa 02 tem outros filtros, declare-os aqui também, na ordem desejada,
+      e remova a anotação @WebFilter deles.
+    -->
+    <filter>
+        <filter-name>FiltroTempo</filter-name>
+        <filter-class>br.edu.ifsp.web.filter.FiltroTempo</filter-class>
+    </filter>
+    <filter>
+        <filter-name>FiltroAutenticacao</filter-name>
+        <filter-class>br.edu.ifsp.web.filter.FiltroAutenticacao</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>FiltroTempo</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FiltroAutenticacao</filter-name>
+        <url-pattern>/tarefas/*</url-pattern>
+    </filter-mapping>
+</web-app>
