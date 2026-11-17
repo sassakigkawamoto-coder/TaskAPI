@@ -1,0 +1,22 @@
+# Bibliotecas e compilação (os .jar ficam fora do repositório)
+*.jar
+lib/
+build/
+target/
+*.class
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+
+# Arquivos locais
+cookies.txt
+.env
+
+# Ferramentas de apoio (não fazem parte da entrega)
+aplicar-commits.sh
+COMMITS.md
